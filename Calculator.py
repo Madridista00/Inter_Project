@@ -28,25 +28,32 @@ def divide(x, y):
     return result
 
 
-print("Shesadzlebeli moqmedebebis chamonatvali.")
-print("1.Mimateba")
-print("2.Gamokleba")
-print("3.Gamravleba")
-print("4.Gayofa")
-
 while True:
+    num1 = num2 = ''
+
+    while type(num1) not in (int, float):
+        try:
+            num1 = eval(input("Sheiyvanet pirveli ricxvi: "))
+        except (NameError, SyntaxError):
+            print("Please, enter a valid nimber...\n")
+
+    while type(num2) not in (int, float):
+        try:
+            num2 = eval(input("Sheiyvanet meore ricxvi: "))
+        except (NameError, SyntaxError):
+            print("Please, enter a valid nimber...\n")
+
+    print("Shesadzlebeli moqmedebebis chamonatvali.")
+    print("1.Mimateba")
+    print("2.Gamokleba")
+    print("3.Gamravleba")
+    print("4.Gayofa")
+
     # momxmareblis archevani
     choice = input("Airchiet shesasrulebeli moqmedebis shesabamisi ricxvi - (1/2/3/4): ")
 
     # momxmareblis archevanis shemowmeba
     if choice in ('1', '2', '3', '4'):
-        try:
-            num1 = float(input("Sheiyvanet pirveli ricxvi: "))
-            num2 = float(input("Sheiyvanet meore ricxvi: "))
-        except ValueError:
-            print("Araswori monacemi. Gtxovt sheiyvanot ricxvi.")
-            continue
-
         if choice == '1':
             print(num1, "+", num2, "=", add(num1, num2))
 
