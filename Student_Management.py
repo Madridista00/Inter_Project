@@ -92,36 +92,63 @@ def main():
 
         if choice == "1":
             name = input("Enter student's name: ")
-            try:
-                roll_number = int(input("Enter student's roll number: "))
-                grade = float(input("Enter student's grade: "))
-                student_system.add_student(name, roll_number, grade)
-                student_system.save_to_json(filename)
-            except ValueError:
-                print("Invalid input. Roll number and grade must be numbers.")
+            while True:
+                try:
+                    roll_number = int(input("Enter student's roll number: "))
+                    if not student_system.is_roll_number_unique(roll_number):
+                        print("Roll number already exists. Please choose a different roll number.")
+                        continue
+                    break
+                except ValueError:
+                    print("Invalid input. Roll number must be a number.")
+
+            while True:
+                try:
+                    grade = float(input("Enter student's grade: "))
+                    break
+                except ValueError:
+                    print("Invalid input. Grade must be a number.")
+
+            student_system.add_student(name, roll_number, grade)
+            student_system.save_to_json(filename)
+
         elif choice == "2":
             student_system.view_all_students()
         elif choice == "3":
-            try:
-                roll_number = int(input("Enter student's roll number to search: "))
-                student_system.search_student_by_roll_number(roll_number)
-            except ValueError:
-                print("Invalid input. Roll number must be a number.")
+            while True:
+                try:
+                    roll_number = int(input("Enter student's roll number to search: "))
+                    break
+                except ValueError:
+                    print("Invalid input. Roll number must be a number.")
+            student_system.search_student_by_roll_number(roll_number)
+
         elif choice == "4":
-            try:
-                roll_number = int(input("Enter student's roll number to update grade: "))
-                new_grade = float(input("Enter student's new grade: "))
-                student_system.update_student_grade(roll_number, new_grade)
-                student_system.save_to_json(filename)
-            except ValueError:
-                print("Invalid input. Roll number and grade must be numbers.")
+            while True:
+                try:
+                    roll_number = int(input("Enter student's roll number to update grade: "))
+                    break
+                except ValueError:
+                    print("Invalid input. Roll number must be a number.")
+            while True:
+                try:
+                    new_grade = float(input("Enter student's new grade: "))
+                    break
+                except ValueError:
+                    print("Invalid input. Grade must be a number.")
+            student_system.update_student_grade(roll_number, new_grade)
+            student_system.save_to_json(filename)
+
         elif choice == "5":
-            try:
-                roll_number = int(input("Enter student's roll number to delete: "))
-                student_system.delete_student_by_roll_number(roll_number)
-                student_system.save_to_json(filename)
-            except ValueError:
-                print("Invalid input. Roll number must be a number.")
+            while True:
+                try:
+                    roll_number = int(input("Enter student's roll number to delete: "))
+                    break
+                except ValueError:
+                    print("Invalid input. Roll number must be a number.")
+            student_system.delete_student_by_roll_number(roll_number)
+            student_system.save_to_json(filename)
+
         elif choice == "6":
             print("Exiting...")
             break
